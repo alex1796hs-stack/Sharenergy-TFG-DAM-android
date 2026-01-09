@@ -3,6 +3,7 @@ package com.example.sharenergy;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -16,6 +17,17 @@ public class SelectActivity extends AppCompatActivity {
     View statusPB1, statusPB2;
 
     PowerbankManager manager;
+
+    // 🔄 Handler para refresco en tiempo real
+    private Handler handler = new Handler();
+
+    private Runnable refrescarRunnable = new Runnable() {
+        @Override
+        public void run() {
+            actualizarVista();
+            handler.postDelayed(this, 1000); // refresca cada 1 segundo
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,17 +43,31 @@ public class SelectActivity extends AppCompatActivity {
         statusPB1 = findViewById(R.id.statusPB1);
         statusPB2 = findViewById(R.id.statusPB2);
 
-        actualizarVista();
-
         cardPB1.setOnClickListener(v -> alquilar(manager.pb1));
         cardPB2.setOnClickListener(v -> alquilar(manager.pb2));
     }
 
+    // inicia el refresco automático
+    @Override
+    protected void onResume() {
+        super.onResume();
+        handler.post(refrescarRunnable);
+    }
+
+    // ⏸ Se detiene al salir de la pantalla
+    @Override
+    protected void onPause() {
+        super.onPause();
+        handler.removeCallbacks(refrescarRunnable);
+    }
+
+    // Actualiza la vista completa
     private void actualizarVista() {
         actualizarPowerbank(manager.pb1, txtPB1Status, statusPB1, cardPB1);
         actualizarPowerbank(manager.pb2, txtPB2Status, statusPB2, cardPB2);
     }
-//Estados de uso de las powerbanks.
+
+    // Estados posibles de una powerbank
     private void actualizarPowerbank(
             Powerbank pb,
             TextView txtStatus,
@@ -68,11 +94,11 @@ public class SelectActivity extends AppCompatActivity {
         }
     }
 
+    // Inicio del alquiler
     private void alquilar(Powerbank pb) {
         if (!pb.estaDisponible()) return;
 
-        pb.disponible = false;
-        pb.tiempoRecargaFin = 0; // 🔴 EN USO
+        pb.iniciarUso();
 
         Intent intent = new Intent(this, UsingActivity.class);
         intent.putExtra("powerbank", pb.id);

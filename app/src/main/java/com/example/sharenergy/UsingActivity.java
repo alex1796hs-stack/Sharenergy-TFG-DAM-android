@@ -43,9 +43,8 @@ public class UsingActivity extends AppCompatActivity {
             long endTime = SystemClock.elapsedRealtime();
             long secondsUsed = (endTime - startTime) / 1000;
 
-            // Recarga simulada de 30segundos.
-            pb.disponible = false;
-            pb.tiempoRecargaFin = System.currentTimeMillis() + 30000;
+            // inicia recarga simulada (30s)
+            pb.finalizarUso();
 
             Intent intent = new Intent(this, SummaryActivity.class);
             intent.putExtra("seconds", secondsUsed);
@@ -53,6 +52,7 @@ public class UsingActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+
     }
     //Tiempo de uso en tiempo real.
     private void startTimer() {

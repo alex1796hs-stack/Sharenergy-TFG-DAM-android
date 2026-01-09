@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Locale;
+
 public class SummaryActivity extends AppCompatActivity {
 
     @Override
@@ -16,23 +18,26 @@ public class SummaryActivity extends AppCompatActivity {
         long seconds = getIntent().getLongExtra("seconds", 0);
         String powerbank = getIntent().getStringExtra("powerbank");
 
-        double minutos = Math.ceil(seconds / 60.0);
-        if (minutos == 0) minutos = 1;
+        double minutes = Math.ceil(seconds / 60.0);
+        if (minutes == 0) minutes = 1;
 
-        double precioBase = 0.50;
-        double precioTiempo = minutos * 0.02;
-        double precioFinal = precioBase + precioTiempo;
+        double precioDesbloqueo = 0.50;
+        double precioTiempo = minutes * 0.02;
+        double precioTotal = precioDesbloqueo + precioTiempo;
 
         TextView txtSummary = findViewById(R.id.txtSummary);
+        TextView txtTotal = findViewById(R.id.txtTotal);
         Button btnFinish = findViewById(R.id.btnFinish);
-        //Texto que muestra el precio de uso de la powerbank.
+
         txtSummary.setText(
-                "Powerbank: " + powerbank +
-                        "\n\nPrecio desbloqueo: 0,50 €" +
-                        "\nTiempo de uso: " + minutos + " min" +
-                        "\nPrecio por tiempo: " + String.format("%.2f", precioTiempo) + " €" +
-                        "\n\nTOTAL A PAGAR: " + String.format("%.2f", precioFinal) + " €"
+                "Powerbank: " + powerbank + "\n\n" +
+                        "Precio desbloqueo: 0,50 €\n" +
+                        "Tiempo de uso: " + (long) minutes + " min\n" +
+                        "Precio por tiempo: " + String.format(Locale.US, "%.2f €", precioTiempo) + "\n\n" +
+                        "TOTAL A PAGAR:"
         );
+
+        txtTotal.setText(String.format(Locale.US, "%.2f €", precioTotal));
 
         btnFinish.setOnClickListener(v -> finishAffinity());
     }
