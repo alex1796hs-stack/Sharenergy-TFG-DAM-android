@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_diagonal">
+
+        <TextView
+            android:id="@+id/txtWelcome"
+            android:text="Selecciona una powerbank"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="#2E7D32"
+            android:layout_marginBottom="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <!-- Pb01 -->
+           <LinearLayout
+            android:id="@+id/cardPB1"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="#FFFFFF"
+            android:elevation="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+               android:foreground="?attr/selectableItemBackground"
+               android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo_img"
+                android:contentDescription="Logo Sharenergy"/>
+
+            <TextView
+                android:text="Powerbank PB-001"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_marginBottom="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+               <View
+                   android:id="@+id/statusPB1"
+                   android:layout_width="12dp"
+                   android:layout_height="12dp"
+                   android:layout_gravity="center"
+                   android:layout_marginBottom="6dp"
+                   android:background="@drawable/circle_green"/>
+
+               <TextView
+                android:id="@+id/txtPB1Status"
+                android:text="Estado: Disponible"
+                android:textColor="#2E7D32"
+                android:gravity="center"
+                android:layout_marginBottom="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+        <!-- Pb02-->
+        <LinearLayout
+            android:id="@+id/cardPB2"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:background="#FFFFFF"
+            android:elevation="4dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_width="300dp"
+            android:layout_gravity="center"
+            android:foreground="?attr/selectableItemBackground"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="8dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/logo_img"
+                android:contentDescription="Logo Sharenergy"/>
+
+            <TextView
+                android:text="Powerbank PB-002"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_marginBottom="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <View
+                android:id="@+id/statusPB2"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="6dp"
+                android:background="@drawable/circle_green"/>
+
+            <TextView
+                android:id="@+id/txtPB2Status"
+                android:text="Estado: Disponible"
+                android:textColor="#2E7D32"
+                android:gravity="center"
+                android:layout_marginBottom="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
